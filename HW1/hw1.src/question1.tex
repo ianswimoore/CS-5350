@@ -4,7 +4,7 @@
 \begin{enumerate}
 
 
-\item~[25 points] 
+\item~[25 points]
   Mark loves mangoes. Unfortunately he is lousy at picking ripe mangoes at the grocery. He needs your help.
   You need to build a decision tree that will help Mark decide if a mango is ripe or not. You need to make the decision based on
   four features described below:
@@ -38,6 +38,17 @@
 
   \begin{enumerate}
   \item~[5 points] How many possible functions are there to map these four features to a boolean decision? How many functions are consistent with the given training dataset?
+
+  {\color{red}
+  for \textbf{Variety} there are 3 possible values \\
+  For \textbf{Color} there are 3 possible values \\
+  For \textbf{Smell} there are 2 possible values \\
+  For \textbf{Time} there are 2 possible values \\
+  So, the total number of outputs is $3 \times 3 \times 2 \times 2 = 36$ \\
+  There are $2^16$ possible binary ways to fill up those $36$ outputs, so the total number of possible functions is $2^{36} = 68719476736$ \\
+  Since there are 8 examples in the training data. This divides the combinations by $2^8 = 256$, so the number of consistent functions is $2^{36 - 8} = 2^{28} = 268435456$.
+  }
+
   \item~[3 points] What is the entropy of the labels in this data? When calculating entropy, the base of the logarithm should be base 2.
   \item~[4 points] Compute the information gain of each feature and enter it
     into Table~\ref{tb-entropy-ig}. Specify upto 3 decimal places.
@@ -82,20 +93,20 @@
   Aside from entropy, which we saw in class and you used in the previous question, there are other methods to measure impurity.
 
   We will now develop a variant of the ID3 algorithm that does not use entropy. If, at some node, we stopped growing the tree and assign the most common label of the remaining examples at that node, then the empirical error on the training set at that node will be
-  % 
+  %
   $$MajorityError = 1 - \max_{i}p_i$$
-  % 
+  %
   where, $p_i$ is the fraction of examples that are labeled with the $i^{th}$ label.
 
 
 
-  
+
 
   \begin{enumerate}
   \item~[2 points]   Notice that $MajorityError$ can be thought of as a measure of impurity just like entropy. Just like we used entropy to define information gain, we can define a new version of information gain that uses $MajorityError$ in place of entropy. Write down an expression that defines a new version of information gain that uses $MajorityError$ in place of entropy.
-    
+
   \item~[6 points] Calculate the value of your newly defined information gain from the previous question for the four features in the mango dataset from ~\ref{tb-mango-train}. Use 3 significant digits. Enter the information gain into Table~\ref{tb-maj-ig}.
-    
+
     \begin{table}[h!]
       \centering
       \begin{tabular}{c|c}
