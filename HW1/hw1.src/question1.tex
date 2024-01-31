@@ -40,16 +40,28 @@
   \item~[5 points] How many possible functions are there to map these four features to a boolean decision? How many functions are consistent with the given training dataset?
 
   {\color{red}
-  for \textbf{Variety} there are 3 possible values \\
-  For \textbf{Color} there are 3 possible values \\
-  For \textbf{Smell} there are 2 possible values \\
-  For \textbf{Time} there are 2 possible values \\
-  So, the total number of outputs is $3 \times 3 \times 2 \times 2 = 36$ \\
-  There are $2^16$ possible binary ways to fill up those $36$ outputs, so the total number of possible functions is $2^{36} = 68719476736$ \\
-  Since there are 8 examples in the training data. This divides the combinations by $2^8 = 256$, so the number of consistent functions is $2^{36 - 8} = 2^{28} = 268435456$.
+    for \textbf{Variety} there are 3 possible values \\
+    For \textbf{Color} there are 3 possible values \\
+    For \textbf{Smell} there are 2 possible values \\
+    For \textbf{Time} there are 2 possible values \\
+    So, the total number of outputs is $3 \times 3 \times 2 \times 2 = 36$ \\
+    There are $2^16$ possible binary ways to fill up those $36$ outputs, so the total number of possible functions is $2^{36} = 68719476736$ \\
+    Since there are 8 examples in the training data. This divides the combinations by $2^8 = 256$, so the number of consistent functions is $2^{36 - 8} = 2^{28} = 268435456$.
   }
 
   \item~[3 points] What is the entropy of the labels in this data? When calculating entropy, the base of the logarithm should be base 2.
+
+  {\color{red}
+
+    \begin{equation}
+      Entropy(S) = H(S) = -p_+log_2(p_+)-p_-log_2(p_-)
+    \end{equation}
+
+    $H(Ripe) = -\left(\frac{4}{8}\log_2\left(\frac{4}{8}\right) + \frac{4}{8}\log_2\left(\frac{4}{8}\right)\right) = 1$
+
+    Essentially, since there is a 50-50 chance of a mango being ripe according to the training data, the entropy is 1.
+  }
+
   \item~[4 points] Compute the information gain of each feature and enter it
     into Table~\ref{tb-entropy-ig}. Specify upto 3 decimal places.
     \begin{table}[h]
