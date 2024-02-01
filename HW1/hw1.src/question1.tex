@@ -70,23 +70,111 @@
 
         \hline
         Feature & Information Gain \\ \hline
-        Variety &                  \\
-        Color   &                  \\
-        Smell   &                  \\
-        Time    &                  \\ \hline
+        Variety & 0.156            \\
+        Color   & 0.062            \\
+        Smell   & 0.189            \\
+        Time    & 0.049            \\ \hline
       \end{tabular}
-      \caption{Information gain for each feature.}
       \label{tb-entropy-ig}
     \end{table}
+
+    {\color{red}
+      Information gain:
+      \begin{equation}
+        Gain(S, A) = H(S) - \sum_{v \in Values(A)}\frac{|S_v|}{|S|}H(S_v)
+      \end{equation}
+      $S_v$ is the subset of examples where the value of attribute $A$ is set to value $v$\\
+      \textbf{Variety}:\\
+      $Alphonso = Al, Keitt = Ke, Haden = Ha$\\
+      $Gain(S, Variety) = 1 = \frac{4}{8}H(Al) + \frac{3}{8}H(Ke) + \frac{1}{8}H(Ha)$\\
+      $H(Al) = -\frac{2}{4}\log_2(\frac{2}{4}) - \frac{2}{4}\log_2(\frac{2}{4}) = 1$\\
+      $H(Ke) = -\frac{1}{3}\log_2(\frac{1}{3}) - \frac{2}{3}\log_2(\frac{2}{3}) = 0.918$\\
+      $H(Ha) = 0 \leftarrow$ Since single value so all False\\
+      $Gain(S, Variety) = 1 - \left(\frac{4}{8}1 + \frac{3}{8}0.918 + \frac{1}{8}0\right) = 0.156$\\
+      \textbf{Color}:\\
+      $Red = R, Yellow = Y, Green = G$\\
+      $Gain(S, Color) = 1 - \left(\frac{3}{8}H(R) + \frac{3}{8}H(Y) + \frac{2}{8}H(G)\right)$\\
+      $H(R) = -\frac{2}{3}\log_2(\frac{2}{3}) - \frac{1}{3}\log_2(\frac{1}{3}) = 0.918$\\
+      $H(Y) = -\frac{1}{3}\log_2(\frac{1}{3}) - \frac{2}{3}\log_2(\frac{2}{3}) = 0.918$\\
+      $H(G) = -\frac{1}{2}\log_2(\frac{1}{2}) - \frac{1}{2}\log_2(\frac{1}{2}) = 1$\\
+      $Gain(S, Color) = 1 - \left(\frac{3}{8}0.918 + \frac{3}{8}0.918 + \frac{2}{8}1\right) = 0.0615$\\
+      \textbf{Smell}:\\
+      $Sweet = S, None = N$\\
+      $Gain(S, Smell) = 1 - \left(\frac{4}{8}H(S) + \frac{4}{8}H(N)\right)$\\
+      $H(S) = -\frac{3}{4}\log_2(\frac{3}{4}) - \frac{1}{4}\log_2(\frac{1}{4}) = 0.811$\\
+      $H(N) = -\frac{1}{4}\log_2(\frac{1}{4}) - \frac{3}{4}\log_2(\frac{3}{4}) = 0.811$\\
+      $Gain(S, Smell) = 1 - \left(\frac{4}{8}0.811 + \frac{4}{8}0.811\right) = 0.189$\\
+      \textbf{Time}:\\
+      $One = O, Two = T$\\
+      $Gain(S, Time) = 1 - \left(\frac{3}{8}H(O) + \frac{5}{8}H(T)\right)$\\
+      $H(O) = -\frac{2}{3}\log_2(\frac{2}{3}) - \frac{1}{3}\log_2(\frac{1}{3}) = 0.918$\\
+      $H(T) = -\frac{2}{5}\log_2(\frac{2}{5}) - \frac{3}{5}\log_2(\frac{3}{5}) = 0.971$\\
+      $Gain(S, Time) = 1 - \left(\frac{3}{8}0.918 + \frac{5}{8}0.971\right) = 0.049$\\
+    }
+
   \item~[1 points] Which attribute will you use to construct the root of the
     tree using the information gain heuristic of the ID3 algorithm?
+
+    {\color{red}
+      Smell. It has the highest information gain.
+    }
+
   \item~[8 points] Using the root that you selected in the previous question,
     construct a decision tree that represents the data. You do not have to use
     the ID3 algorithm here, you can show any tree with the chosen root.
+
+    {\color{red}
+      \begin{forest}
+        [Smell
+          [Sweet
+            [Variety
+              [Alphonso
+                [TRUE]
+              ]
+              [Keitt
+                [FALSE]
+              ]
+              [Haden
+                [TRUE]
+              ]
+            ]
+          ]
+          [None
+            [Variety
+              [Alphonso
+                [FALSE]
+              ]
+              [Keitt
+                [Time
+                  [One
+                    [TRUE]
+                  ]
+                  [Two
+                    [FALSE]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      \end{forest}
+    }
+
   \item~[4 points] Suppose you are given three more examples, listed in
     Table~\ref{tb-mango-test}. Use your decision tree to predict the label for
     each example. Also report the accuracy of the classifier that you have
     learned.
+
+    {\color{red}
+      \textbf{Example 1:} Sweet, Alphonso, Two, Green $\rightarrow$ True\\
+      Prediction: Sweet $\rightarrow$ Alphonso $\rightarrow$ True\\
+      \textbf{Example 2:} Sweet, Keitt, One, Red $\rightarrow$ False\\
+      Prediction: Sweet $\rightarrow$ Keitt $\rightarrow$ False\\
+      \textbf{Example 3:} None, Haden, Two, Yellow $\rightarrow$ True\\
+      Prediction: None $\rightarrow$ Haden $\rightarrow$ False (since 2/3 of the None Smell in the tree were false, and we have no other Haden examples in None Smell in the tree)\\
+      Accuracy: 2/3 = 66.67\%
+    }
+
   \end{enumerate}
 
   \begin{table}[h!]
