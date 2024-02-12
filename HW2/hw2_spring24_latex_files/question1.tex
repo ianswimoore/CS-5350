@@ -8,6 +8,14 @@
   three different Boolean functions, all of which can produce the
   label $y$ when given the inputs $x$.
 
+  {\color{red}
+    \begin{enumerate}
+      \item $f_1(x): $ $y = x4$
+      \item $f_2(x): $ $y = x2 \wedge x3 \wedge x4$
+      \item $f_3(x): $ $y = x1' \wedge x4$
+    \end{enumerate}
+  }
+
   \begin{table}[h]
     \centering
     \begin{tabular}{ccccc}
@@ -22,11 +30,19 @@
     \caption{Initial data set}
     \label{tab:boolean-function-data-1}
   \end{table}
-  
+
 \item ~[5 points] Now the Table \ref{tab:boolean-function-data-1} is
   expanded to Table \ref{tab:boolean-function-data-2} by adding more
   data points. How many errors will each of your functions from the
   previous questions make on the expanded data set.
+
+  {\color{red}
+    \begin{enumerate}
+      \item $f_1(x)$ has 0 errors
+      \item $f_2(x)$ has 2 errors (rows 6 and 7 overall (rows 3 and 4 in table 2))
+      \item $f_3(x)$ has 2 errors (rows 3 and 6 overall (row 3 in table 1, row 3 in table 2))
+    \end{enumerate}
+  }
 
   \begin{table}[h]
     \centering
@@ -45,12 +61,21 @@
     \caption{Expanded data set}
     \label{tab:boolean-function-data-2}
   \end{table}
-  
+
 \item ~[5 points] Is the function in Table
   \ref{tab:boolean-function-data-2} linearly separable? If so, write
   down a linear threshold function that classifies the data. If not,
   prove that there is no linear threshold function that can classify
   the data.
+
+  {\color{red}
+    The function in Table 2 is linearly separable. The linear threshold function that classifies the data is:
+    $$
+    x4 = 1
+    $$
+    Since $x4$ alone can classify the data, it is linearly separable with a single feature. This also applies to the expanded data set with Table 1 and Table 2.
+  }
+
 \end{enumerate}
 
 %%% Local Variables:
