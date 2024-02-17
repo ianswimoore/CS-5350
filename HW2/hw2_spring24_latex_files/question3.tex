@@ -25,11 +25,16 @@ answer. You need to justify your answer with a short proof.
 
   Our goal is to come up with a mistake bound algorithm that will
   learn any function $f\in\mathcal{C}_1$.
-  
+
   \begin{enumerate}
   \item~[5 points] Determine $\vert\mathcal{C}_1\vert$, the size of
     concept class.
-    
+
+  {\color{red}
+    The size of the concept class $\mathcal{C}_1$ is $2^n$.\\
+    \textbf{Proof:} For each of the $n$ features, we have two choices: $0$ or $1$. Therefore, the total number of functions in the concept class is $2^n$.
+  }
+
   \item~[15 points] Write a mistake bound learning algorithm for
     this concept class that makes no more than {\em one} mistake on
     any sequence of examples presented to it. Please write the
@@ -37,26 +42,54 @@ answer. You need to justify your answer with a short proof.
 
     Prove the mistake bound for this algorithm.
 
+  {\color{red}
+    Goal: Learn$f \in C_1$ with at most one mistake. \\
+    The algorithm will work as follows:
+
+    \begin{algorithm}[H]
+      \caption{Mistake Bound Learning Algorithm for $\mathcal{C}_1$}
+      \begin{algorithmic}[1]
+        \State Initialize $h(\bx) = 0$ (always predict $0$)
+        \For each example $\bx$ presented to the algorithm
+        \If {$h$ predicts correctly}
+        \State continue
+        \EndIf
+        \If {$h$ predicts incorrectly}
+        \State update $h$ to predict $1$ if the example is $\bx$
+        \EndIf
+        \EndFor
+      \end{algorithmic}
+    \end{algorithm}
+
+    \textbf{Proof of Mistake Bound:} The algorithm will make at most one mistake. If the algorithm makes a mistake, it will update the hypothesis to predict $1$ for the example that was misclassified. After this update, the algorithm will not make any more mistakes since there is exactly one element $\bx$ that exactly equals $z$. Therefore, the algorithm will make at most one mistake.
+  }
+
   \end{enumerate}
 
 \item Suppose we have a concept class $\mathcal{C}_2$ that consists
   of exactly $n$ functions $\{f_1, f_2, \cdots, f_n\}$, where each
   function $f_i$ is defined as follows:
-  % 
+
   \begin{equation*}
     f_i(\bx) = \bx_i.
   \end{equation*}
   That is, the function $f_i$ returns the value of the $i^{th}$
   feature.
-  
+
   \begin{enumerate}
   \item~[5 points] How many mistakes will the algorithm
     \textbf{CON} from class make on any function from this concept
     class?
+
+    {\color{red}
+      In general, CON will make at most $|C|-1$ mistakes on any concept class $C$.\\
+
+    }
+
   \item~[5 points] How many mistakes will the Halving algorithm make
     on any function from this concept class?
   \end{enumerate}
-  
+
 \end{enumerate}
 
 
