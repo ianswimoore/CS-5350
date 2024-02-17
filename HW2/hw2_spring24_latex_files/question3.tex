@@ -43,7 +43,7 @@ answer. You need to justify your answer with a short proof.
     Prove the mistake bound for this algorithm.
 
   {\color{red}
-    Goal: Learn$f \in C_1$ with at most one mistake. \\
+    Goal: Learn$f \in \mathcal{C}_1$ with at most one mistake. \\
     The algorithm will work as follows:
 
     \begin{algorithm}[H]
@@ -82,12 +82,18 @@ answer. You need to justify your answer with a short proof.
     class?
 
     {\color{red}
-      In general, CON will make at most $|C|-1$ mistakes on any concept class $C$.\\
-
+      In general, \textbf{CON} will make at most $|\mathcal{C}|-1$ mistakes on any concept class $\mathcal{C}$.\\
+      For this concept class $\mathcal{C}_2$, the algorithm \textbf{CON} will make at most $n-1$ mistakes since there are $n$ functions in the concept class.
     }
 
   \item~[5 points] How many mistakes will the Halving algorithm make
     on any function from this concept class?
+
+    {\color{red}
+      In general, the Halving algorithm will make at most $\log_2|\mathcal{C}|$ mistakes on any concept class $\mathcal{C}$.\\
+      For this concept class $\mathcal{C}_2$, the Halving algorithm will make at most $\log_2n$ mistakes since there are $n$ functions in the concept class.
+    }
+
   \end{enumerate}
 
 \end{enumerate}
